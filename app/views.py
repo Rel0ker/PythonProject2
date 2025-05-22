@@ -6,6 +6,8 @@ from .serializers import UserSerializer, LoginSerializer, ProductSerializer, Car
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from .models import Product, Cart, CartItem
+from django.db.models import Q
+
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = UserSerializer
@@ -62,3 +64,4 @@ class CartItemView(viewsets.ModelViewSet):
         if instance.product.stock < new_quantity:
             raise serializers.ValidationError("Not enough stock")
         serializer.save()
+
